@@ -9,6 +9,7 @@ public class WorldRenderer {
 	private SpriteBatch batch;
 	private World world;
 	private Texture pacmanImg;
+	private MazeRenderer mazeRenderer;
 
 	public WorldRenderer(PacmanGame pacmanGame, World world) {
 		this.pacmanGame = pacmanGame;
@@ -16,10 +17,12 @@ public class WorldRenderer {
 		
 		this.world = world;
 		
+		mazeRenderer = new MazeRenderer(pacmanGame.batch, world.getMaze());
 		pacmanImg = new Texture("pacman.png");
 	}
 	
 	public void render(float delta) {
+		mazeRenderer.render();
 		Pacman pacman = world.getPacman();
 		
 		SpriteBatch batch = pacmanGame.batch;
