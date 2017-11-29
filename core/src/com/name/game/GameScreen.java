@@ -13,19 +13,21 @@ public class GameScreen extends ScreenAdapter{
 	private PacmanGame pacmanGame;
 	private Texture pacmanImg;
 	private Pacman pacman;
-	//private int x;
-	//private int y;
+	
+	World world;
 
 	public GameScreen(PacmanGame pacmanGame) {
 		this.pacmanGame = pacmanGame;
 		pacmanImg = new Texture("pacman.png");
 		
-		pacman = new Pacman(100, 100);
-		//x = 100;
-		//y = 100;
+		//pacman = new Pacman(100, 100);
+		world = new World(pacmanGame);
+		//Pacman pacman = world.getPacman();
 	}
 	
 	private void update(float delta) {
+		Pacman pacman = world.getPacman();
+		
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
 			pacman.move(Pacman.DIRECTION_LEFT);
 		}
@@ -46,6 +48,8 @@ public class GameScreen extends ScreenAdapter{
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		Pacman pacman = world.getPacman();
 		
 		SpriteBatch batch = pacmanGame.batch;
 		batch.begin();
